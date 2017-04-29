@@ -21,6 +21,9 @@
     
  
 ## Run
+In the _final_project_ folder you can:
+ - run a python notebook named `da5_fraud_detection.ipynb`
+ - or you can simply run 'poi_id.py`
 
 ## Data
  The data and the starter code that reads in the data, takes my features of choice, then puts them into a numpy array is provided by Udacity and is also in this repo.
