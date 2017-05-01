@@ -46,7 +46,7 @@ Principal Component of a dataset is the direction that has the largest variance*
 I tried several classifiers _with_ PCA.
 
 | Classifier | Accuracy | Precision  | Recall  | F1  |
-| ------------- |:--------:|:--------:|:--------:|
+| --- | :--------: | :--------: | :--------: | :--------: |
 | GaussianNB | 0.85653 | 0.45498 | 0.38400 | 0.41649 |
 | SVC | 0.85807 | 0.36864 | 0.09050 | 0.14532 |
 | Knn | 0.86080 | 0.13934 |0.00850 | 0.01602 |
@@ -58,8 +58,8 @@ The GaussianNB peformed the best, with the highest values for all evaluation met
 With the help of GridSearchCV, wich is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. We are able to tune the DecisionTree classifier.
 
 | Classifier with GridSearchCV | Accuracy | Precision  | Recall  | F1  |
-| ------------- |:--------:|:--------:|:--------:|
-| DecisionTree | 0.85653 | 0.45498 | 0.38400 | 0.41649 |
+| --- |:--------:|:--------:|:--------:|:--------: |
+| DecisionTree | 0.85753 | 0.40200 | 0.14050 | 0.20823 |
 
 ### Validate and Evaluate
 As seen above we have used some validation metrics.
