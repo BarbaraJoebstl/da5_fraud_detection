@@ -108,7 +108,6 @@ my_dataset = data_dict
 data = featureFormat(my_dataset, features_list, sort_keys=True)
 labels, features = targetFeatureSplit(data)
 
-# Task 4: Try a varity of classifiers
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.model_selection import GridSearchCV
@@ -124,39 +123,70 @@ unsorted_pairs = zip(features_list[1:], scores)
 sorted_pairs = list(reversed(sorted(unsorted_pairs, key=lambda x: x[1])))
 
 print 'Select KBest', sorted_pairs
-
 feature_list = features_list[1:8]
 
-# Please name your classifier clf for easy export below.
-# Note that if you want to do PCA or other multi-stage operations,
-# you'll need to use Pipelines. For more info:
-# http://scikit-learn.org/stable/modules/pipeline.html
+from sklearn.decomposition import PCA
 
-# Provided to give you a starting point. Try a variety of classifiers.
+
+def doPCA():
+    pca = PCA(n_components=8)
+    pca.fit(data)
+    return pca
+
+
+pca = doPCA()
+print pca.explained_variance_ratio_
+
+
+# Task 4: Try a varity of classifiers
+
+from __future__ import print_function
+
+from time import time
+import logging
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+
 from sklearn.naive_bayes import GaussianNB
-clf = GaussianNB()
+from sklearn.pipeline import Pipeline
+from sklearn.naive_bayes import GaussianNB
+from sklearn.pipeline import Pipeline
+
+nb = GaussianNB()
+pca = doPCA()
+clf = Pipeline(steps=[('pca', pca), ('nb', nb)])
 
 test_classifier(clf, my_dataset, features_list)
 
+from sklearn.preprocessing import StandardScaler
 from sklearn import svm
+from sklearn.naive_bayes import GaussianNB
+from sklearn.pipeline import Pipeline
 
 svc = SVC(kernel="linear")
-estimators = [('scale', StandardScaler()), ('svc', svc)]
-clf = Pipeline(estimators)
+pca = doPCA()
+
+clf = Pipeline(steps=[('pca', pca), ('scale', StandardScaler()), ('svc', svc)])
 
 test_classifier(clf, my_dataset, features_list)
 
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
 
 knn = KNeighborsClassifier()
-estimators = [('scale', StandardScaler()), ('knn', knn)]
-clf = Pipeline(estimators)
+pca = doPCA()
+
+clf = Pipeline(steps=[('pca', pca), ('scale', StandardScaler()), ('knn', knn)])
+
 test_classifier(clf, my_dataset, features_list)
 
-
 # Task 5: Tune your classifier to achieve better than .3 precision and recall
+
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
 from sklearn.cross_validation import train_test_split
