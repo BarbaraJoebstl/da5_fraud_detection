@@ -66,7 +66,8 @@ With the new features we are able to improve the accuracy from 0.79015 to 0.7914
 - *Knn.* Because this algorithm measure the distances between pairs of samples, we have to scale the features.
 - *DecisionTree, RandomForest.* Do not require feature scaling.
 
-We tried several classifiers _with_ PCA and n_components = 10 .
+We tried several classifiers _with_ PCA and n_components = 10:
+
 | Classifier | Accuracy | Precision  | Recall  | F1  |
 | --- | :--------: | :--------: | :--------: | :--------: |
 | GaussianNB | 0.85653 | 0.45498 | 0.38400 | 0.41649 |
@@ -75,7 +76,8 @@ We tried several classifiers _with_ PCA and n_components = 10 .
 | DecisionTree | 0.79567 | 0.24631 | 0.25850 | 0.25226 |
 | RandomForest | 0.85240 | 0.36352 | 0.14250 | 0.20474 |
 
-After optimizing the feature selection with SelectKBest and k=4, we were able to achieve these scores.
+After optimizing the feature selection with SelectKBest and k=4, we were able to achieve these scores:
+
 | Classifier | Accuracy | Precision  | Recall  | F1  |
 | --- | :--------: | :--------: | :--------: | :--------: |
 | GaussianNB | 0.84677 | 0.50312 | 0.32300 | 0.39342 |
