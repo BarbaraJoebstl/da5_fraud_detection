@@ -46,14 +46,17 @@ With the new features we are able to improve the accuracy from 0.79015 to 0.7914
 
 ## Amount of Features
 
-    By selecting (the best) features we want to 
+By selecting (the best) features we want to 
         - reduce overfitting
         - improve accuracy
         - reduce training time
+        
+Because we were not sure how many features and which feature selection to use, we plotted two charts to compare SelectKBest and PCA. We plotted the scores depending on the number of best features.
 
-    Because we were not sure how many features and which feature selection to use, we plotted two charts to compare SelectKBest and PCA. We plotted the scores depending on the number of best features.
+![pca](https://cloud.githubusercontent.com/assets/6280553/25783369/a14fe2dc-335b-11e7-8c32-a78888105ea4.png)
+![selectkbest](https://cloud.githubusercontent.com/assets/6280553/25783371/a5a070b8-335b-11e7-81d9-6580d0cd48c4.png)
 
-    As the plot above shows the best scores can be achieved with using the best 19 features. But the best scores of PCA are worse than those of SelectK Best. Regarding the calculating time of the program and the scores, we suggest that is is better to use SelectK Best, because only 4 features are needed to get scores around 0.4.
+As the plot above shows the best scores can be achieved with using the best 19 features. But the best scores of PCA are worse than those of SelectK Best. Regarding the calculating time of the program and the scores, we suggest that is is better to use SelectK Best, because only 4 features are needed to get scores around 0.4.
 
 
 
@@ -66,7 +69,9 @@ With the new features we are able to improve the accuracy from 0.79015 to 0.7914
 - *Knn.* Because this algorithm measure the distances between pairs of samples, we have to scale the features.
 - *DecisionTree, RandomForest.* Do not require feature scaling.
 
-We tried several classifiers _with_ PCA and n_components = 10:
+#### PCA
+
+We tried several classifiers _with_ n_components = 10:
 
 | Classifier | Accuracy | Precision  | Recall  | F1  |
 | --- | :--------: | :--------: | :--------: | :--------: |
@@ -75,6 +80,9 @@ We tried several classifiers _with_ PCA and n_components = 10:
 | Knn | 0.86080 | 0.13934 |0.00850 | 0.01602 |
 | DecisionTree | 0.79567 | 0.24631 | 0.25850 | 0.25226 |
 | RandomForest | 0.85240 | 0.36352 | 0.14250 | 0.20474 |
+
+
+#### SelectKBest
 
 After optimizing the feature selection with SelectKBest and k=4, we were able to achieve these scores:
 
