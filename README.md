@@ -42,7 +42,7 @@ The new features are:
 -- `fraction_from_poi`. from_poi_to_this_person/from_messages
 -- `fraction_bonus`. total_payments/bonus
 
-With the new features we are able to improve the accuracy from 0.79015 to 0.79146 and also the other scores got a little bit better.
+With the new features we are able to improve the accuracy from 0.79015 to 0.79146 using the DecisionTreeClassifier and also the other scores got a little bit better.
 
 ## Amount of Features
 
@@ -90,10 +90,30 @@ Altough the boost of the accuracy sank for every classifier at about 0.01, we we
 
 The GaussianNB peformed the best, with the highest values for all evaluation metrics.
 
-With the help of GridSearchCV, wich is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. We are able to boost the accuracy and the precision of DecisionTree classifier, but the recall got worse. 
-So we will use the GaussianNB, because we achieved the best result in the shortest time.
+#### Tuning 
 
-### Validation
+We received the best result with the GaussianNB. 
+As there are not a lot of parameters to tune there, we want to tune the second best algorithm - DecisionTreeClassifier -  with the help of GridSearch, this is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance.
+
+The default parameters for DecisionTreeClassifier are:
+                    class_weight=None, criterion='gini, max_depth=None,
+                    max_features=None, max_leaf_nodes=None,
+                    min_impurity_split=1e-07, min_samples_leaf=1,
+                    min_samples_split=2, min_weight_fraction_leaf=0.0,
+                    presort=False, random_state=None, splitter='best'
+
+We now want to tune this parameters:
+- min_samples_split with 2, 3 splits,
+- min_samples_leaf with 1, 2 or 3 leaves.
+- criterion measures the quality of a split, supported criterias are “gini” for the Gini impurity and “entropy” for the information gain. 
+
+| Classifier | Accuracy | Precision  | Recall  | F1  |
+| --- | :--------: | :--------: | :--------: | :--------: |
+| DecisionTree | 0.80262 | 0.32848 | 0.27100 | 0.29699 |
+
+ We are able to boost the accuracy and the precision of DecisionTree classifier, but the recall got worse. Considering take it took much longer to calculate these and the outcome was not good, we will use the GaussianNB as our classifier. This classifier achieved the best result in the shortest time.
+
+### Evaluation
 
 As seen above we have used some validation metrics.
 Validation is important because it gives an estimate of the performance of an independent dataset and serves as a check for overfitting.
@@ -110,9 +130,9 @@ _good precision_. Whenever the target (in our case POI) gets flagged in the data
 This score is a measure of a test's accuracy. It considers recall and precision.
 _good f1 score_. This is the best of both worlds. Both my false positive and false negative rates are low.
 
-### Evaluation
+### Validation
 
-Validation is process of determining how well your model performs. We are using k-fold cross validation for this project. This means the data ist split into test (best validation, when maximum amount) and training (best learning results, when maximum amount). In order to handle the trade off between the split data, we run k separate learning experiment, so at the end all data has been used for training and testing.
+ We are using k-fold cross validation for this project. This means the data ist split into test (best validation, when maximum amount) and training (best learning results, when maximum amount). In order to handle the trade off between the split data, we run k separate learning experiment, so at the end all data has been used for training and testing.
 
 In our case the  sklearn StratifiedShuffleSplit with labels, folds=1000 and random_state = 42 as parameters is used as a cross-validator in the tester.py
 
