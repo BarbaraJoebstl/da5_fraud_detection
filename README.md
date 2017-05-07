@@ -88,11 +88,8 @@ Altough the boost of the accuracy sank for every classifier at about 0.01, we we
 
 The GaussianNB peformed the best, with the highest values for all evaluation metrics.
 
-With the help of GridSearchCV, wich is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. We are able to tune the DecisionTree classifier.
-
-| Classifier with GridSearchCV | Accuracy | Precision  | Recall  | F1  |
-| --- |:--------:|:--------:|:--------:|:--------: |
-| DecisionTree | 0.85753 | 0.40200 | 0.14050 | 0.20823 |
+With the help of GridSearchCV, wich is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. We are able to boost the accuracy and the precision of DecisionTree classifier, but the recall got worse. 
+So we will use the GaussianNB, because we achieved the best result in the shortest time.
 
 ### Validation
 
