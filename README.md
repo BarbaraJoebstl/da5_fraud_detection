@@ -69,7 +69,9 @@ As the plot above shows the best scores can be achieved with using the best 19 f
 - *Knn.* Because this algorithm measure the distances between pairs of samples, we have to scale the features.
 - *DecisionTree, RandomForest.* Do not require feature scaling.
 
-We tried several classifiers _with_ PCA and n_components = 10:
+#### PCA
+
+We tried several classifiers _with_ n_components = 10:
 
 | Classifier | Accuracy | Precision  | Recall  | F1  |
 | --- | :--------: | :--------: | :--------: | :--------: |
@@ -78,6 +80,9 @@ We tried several classifiers _with_ PCA and n_components = 10:
 | Knn | 0.86080 | 0.13934 |0.00850 | 0.01602 |
 | DecisionTree | 0.79567 | 0.24631 | 0.25850 | 0.25226 |
 | RandomForest | 0.85240 | 0.36352 | 0.14250 | 0.20474 |
+
+
+#### SelectKBest
 
 After optimizing the feature selection with SelectKBest and k=4, we were able to achieve these scores:
 
