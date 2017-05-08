@@ -24,11 +24,11 @@ In the dataset there are 18 persons flagged as POI and 128 as non POI. This show
 
 We can identify some outliers in the salary. SKILLING JEFFREY K, LAY KENNETH L and FREVERT MARK A had a salary over 1.000.000 each. The highest Bonus had LAVORATO JOHN J. There are some more outliers, but we want to keep this data for our analysis, because those are more likely to be anomalies than outliers.
 
-*Missing Data*.
-- Feauteres: When we take a closer look at the feautures, we can see that 
+#### Missing Data
+- Feauteres. When we take a closer look at the feautures, we can see that 
 `restricted_stock_deferred`, `director_fees` and `loan_advances` have at least 88.7% of NaN values. But for now we will not remove them, because even sparse data can predict well.
 
-- Datapoints:
+- Datapoints.
 There are four entries that have 13 or more NaN s out of 15. We remove "LOCKHART EUGENE E" because this entry only contains NaNs and we will also remove "THE TRAVEL AGENCY IN THE PARK", because it contains only on entry and is not a person.
 
 ### Optimize Feature Selection
@@ -38,9 +38,9 @@ After removing the features with the most NaN values, we engineer new features t
 We want to create new features showing the fraction of the POI messages sent, because we think that the messaging between POIs relatively higher than between non POIs. We also suggest that the bonus for POIs is relatively higher than for non POIs.
 
 The new features are:
--- `fraction_to_poi`. from_this_person_to_poi/to_messages
--- `fraction_from_poi`. from_poi_to_this_person/from_messages
--- `fraction_bonus`. total_payments/bonus
+- *`fraction_to_poi`.* from_this_person_to_poi/to_messages
+- *`fraction_from_poi`.* from_poi_to_this_person/from_messages
+- *`fraction_bonus`.* total_payments/bonus
 
 With the new features we are able to improve the accuracy from 0.79015 to 0.79146 using the DecisionTreeClassifier and also the other scores got a little bit better.
 
@@ -57,8 +57,6 @@ Because we were not sure how many features and which feature selection to use, w
 ![selectkbest](https://cloud.githubusercontent.com/assets/6280553/25783371/a5a070b8-335b-11e7-81d9-6580d0cd48c4.png)
 
 As the plot above shows the best scores can be achieved with using the best 19 features. But the best scores of PCA are worse than those of SelectK Best. Regarding the calculating time of the program and the scores, we suggest that is is better to use SelectK Best, because only 4 features are needed to get scores around 0.4.
-
-
 
 ### Algorithm
 
@@ -111,6 +109,7 @@ The default parameters for DecisionTreeClassifier are:
                     presort=False, random_state=None, splitter='best'
 
 We now want to tune this parameters:
+
 - min_samples_split with 2, 3 splits,
 - min_samples_leaf with 1, 2 or 3 leaves.
 - criterion measures the quality of a split, supported criterias are “gini” for the Gini impurity and “entropy” for the information gain. 
